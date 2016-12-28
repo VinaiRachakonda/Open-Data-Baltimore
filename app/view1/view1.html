@@ -1,1 +1,44 @@
-<p>This is the partial for view 1.</p>
+<head><h1>  Salary Ranges
+</h1>
+</head>
+
+
+
+
+<body ng-app="myApp.view1">
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0-rc.1/angular.min.js"></script>
+<script src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script>
+
+<div id = "container" style="width:1000px;">
+
+    <div id = "chart1" ng-controller="View1Ctrl" style = "max-width:800px; max-height:400px; float: left; " >
+
+        <pie-chart ng-if="chart.type === 'pie'" data="chart.pieData">
+            <p> Hello</p>
+        </pie-chart>
+
+
+        <canvas id="myChart" ng-if="chart.type === 'bar'" style="background: blue">
+        </canvas>
+        <select id="chartType" ng-model="chart.type">
+            <option value="pie">Pie</option>
+            <option value="bar">Bar</option>
+        </select>
+    </div>
+
+
+    <div id="YearFilters" ng-controller="filterOptions" style = "float: right;">
+
+        <p> Filter by Year: <select ng-model="selectedName" ng-options="x for x in options">
+        </select> </p>
+
+    </div>
+
+
+
+</div>
+
+
+</body>
