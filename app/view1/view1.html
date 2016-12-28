@@ -15,17 +15,28 @@
 
     <div id = "chart1" ng-controller="View1Ctrl" style = "max-width:800px; max-height:400px; float: left; " >
 
-        <pie-chart ng-if="chart.type === 'pie'" data="chart.pieData">
-            <p> Hello</p>
-        </pie-chart>
+        <div class = "container">
+            <pie-chart id = "myChart" ng-if="chart.type === 'pie'" data="chart.chartData" labels = "chart.labels">
+
+            </pie-chart>
+
+            <bar-chart id = "myChart2" ng-if="chart.type === 'bar'" data="chart.chartData" labels = "chart.labels">
+
+            </bar-chart>
+
+        </div>
 
 
-        <canvas id="myChart" ng-if="chart.type === 'bar'" style="background: blue">
-        </canvas>
-        <select id="chartType" ng-model="chart.type">
-            <option value="pie">Pie</option>
-            <option value="bar">Bar</option>
-        </select>
+        <!--<canvas id="myChart2" ng-if="chart.type === 'bar'" style="background: blue">-->
+        <!--</canvas>-->
+
+        <div>
+            <select id="chartType" ng-model="chart.type">
+                <option value="pie">Pie</option>
+                <option value="bar">Bar</option>
+            </select>
+        </div>
+
     </div>
 
 
@@ -39,6 +50,4 @@
 
 
 </div>
-
-
 </body>

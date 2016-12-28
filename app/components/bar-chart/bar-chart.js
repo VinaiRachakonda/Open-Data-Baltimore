@@ -1,9 +1,12 @@
+/**
+ * Created by vinairachakonda on 12/28/16.
+ */
 (function () {
 
     angular.module('myApp.view1')
-        .directive('pieChart', function () {
+        .directive('barChart', function () {
             return {
-                templateUrl: 'components/pie-chart/pie-chart.html',
+                templateUrl: 'components/bar-chart/bar-chart.html',
                 scope: {},
                 restrict: 'E',
                 controller: Controller,
@@ -19,7 +22,7 @@
     function Controller($scope, $element) {
         var vm = this;
 
-        vm.title = 'Pie Chart Title';
+        vm.title = 'Bar Chart Title';
 
 
     }
