@@ -27,9 +27,6 @@
         </div>
 
 
-        <!--<canvas id="myChart2" ng-if="chart.type === 'bar'" style="background: blue">-->
-        <!--</canvas>-->
-
         <div>
             <select id="chartType" ng-model="chart.type">
                 <option value="pie">Pie</option>
@@ -40,11 +37,14 @@
     </div>
 
 
-    <div id="YearFilters" ng-controller="filterOptions" style = "float: right;">
+    <div id="YearFilters" ng-controller="yearFilterOptions" style = "float: right;">
 
-        <p> Filter by Year: <select ng-model="selectedName" ng-options="x for x in options">
+        <p> Filter by Year:
+            <select ng-init="year = options[0]" ng-model="year" ng-change = "changeYear(year)" ng-options="x for x in options">
         </select> </p>
 
+
+        <!--UPDATE A SERVICE GIVEN THE CURRENT YEAR. THE CHART DATA WIL GET CURRENT YEAR VIA THE SERVCIE-->
     </div>
 
 

@@ -6,10 +6,20 @@
     angular.module('myApp.view1')
         .service('salaryDataService', serviceFunction)
 
-
+    //call a year filter service that updates a specific function
     function serviceFunction($http) {
-        this.myFunc = function () {
-            return $http.get("https://data.baltimorecity.gov/api/views/nsfe-bg53/rows.json?accessType=DOWNLOAD")
+        this.myFunc = function (x) {
+            var year = 'https://data.baltimorecity.gov/api/views/65ac-s4v5/rows.json?accessType=DOWNLOAD'; //default 2016
+            if (x === '2016'){
+                year = 'https://data.baltimorecity.gov/api/views/65ac-s4v5/rows.json?accessType=DOWNLOAD';
+            }
+            else if (x === '2015'){
+                year = "https://data.baltimorecity.gov/api/views/nsfe-bg53/rows.json?accessType=DOWNLOAD";
+            }else if (x === '2014'){
+                year = 'https://data.baltimorecity.gov/api/views/2j28-xzd7/rows.json?accessType=DOWNLOAD';
+            }
+
+            return $http.get(year)
                 .then(function (response) {
                     console.log("Data has been read!");
                     var data1 = response.data.data;
