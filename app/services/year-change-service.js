@@ -1,22 +1,21 @@
 /**
  * Created by vinairachakonda on 12/29/16.
  */
-( function () {
-    angular.module('myApp.view1')
-        .service('yearChangeService', yearServiceFunction)
 
-    function yearServiceFunction() { //should have getter and setter
-        var service = {};
-        var year  = '2016';
-        service.setYear = function (yr) {
-            year = yr;
-        };
+angular.module('myApp.view1')
+        .service('yearChangeService', ['$rootScope', function ($rootScope) {
 
-        service.getYear = function () {
-            return year;
-        };
+            //service stuff
+            var service = {};
+            service.year = '2016';
+            service.setYear = function (yr) {
+                service.year = yr;
+                $rootScope.$broadcast('year:updated',service.year);
+            };
 
-        return service;
+            service.getYear = function () {
+                return service.year;
+            };
 
-    }
-})();
+            return service;
+        }]);
