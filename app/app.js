@@ -6,7 +6,8 @@ angular.module('myApp', [
     'myApp.view1',
     'myApp.view2',
     'myApp.view3',
-    'chart.js'
+    'chart.js',
+    'ui.grid'
 
 ]).config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');

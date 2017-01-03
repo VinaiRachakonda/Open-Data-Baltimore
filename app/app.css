@@ -102,3 +102,10 @@ radar-chart {
     float:right;
     height: 40px
 }
+
+.grid {
+    width: 1000px;
+    height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
