@@ -5,7 +5,8 @@ How I built and designed this project:
 
 
 # How to run
-
+ 1. First install Node Program Manager @ https://www.npmjs.com/
+ 2. Download the file system and run the following commands.
 ```text
 > npm install
 > npm start
