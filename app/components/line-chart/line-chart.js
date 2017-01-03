@@ -1,12 +1,12 @@
 /**
- * Created by vinairachakonda on 12/28/16.
+ * Created by vinairachakonda on 1/3/17.
  */
 (function () {
 
-    angular.module('myApp.view1')
-        .directive('barChart', function () {
+    angular.module('myApp.view2')
+        .directive('lineChart', function () {
             return {
-                templateUrl: 'components/bar-chart/bar-chart.html',
+                templateUrl: 'components/line-chart/line-chart.html',
                 scope: {},
                 restrict: 'E',
                 controller: Controller,
@@ -22,9 +22,8 @@
     function Controller($scope, $element) {
         var vm = this;
 
-        // vm.title = 'Bar Chart Title';
+        vm.title = 'Line Chart Title';
 
 
     }
 })();
-

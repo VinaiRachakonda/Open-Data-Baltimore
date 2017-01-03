@@ -1,1 +1,53 @@
-<p>This is the partial for view 2.</p>
+<head>
+    <h2>Salaries by Hire Date (Decade)</h2>
+</head>
+
+<body ng-app = "myApp.view2">
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0-rc.1/angular.min.js"></script>
+
+<div id = "chart2" ng-controller="View2Ctrl">
+
+    <div class="container2">
+        <line-chart id="myChart" ng-if="chart.type === 'line'" data="chart.chartData" labels="chart.labels">
+
+        </line-chart>
+
+        <radar-chart id="myChart" ng-if="chart.type === 'radar'" data="chart.chartData" labels="chart.labels">
+
+        </radar-chart>
+
+        <p>Chart Type:
+            <select class="chartType2" ng-model="chart.type">
+                <option value="line">Line</option>
+                <option value="radar">Radar</option>
+            </select>
+        </p>
+
+
+    </div>
+
+</div>
+
+
+<div id="filterContainer">
+
+
+    <div class="AgencyFilters" ng-controller="agencyFilterOptions2">
+        <p> Filter by Agency:
+            <select ng-init="agencies = options1[0]" ng-model="agencies" ng-change="changeAgency(agencies)">
+                <option value="All"> All</option>
+                <option value="Mayors Office"> Mayors Office</option>
+                <option value="Fire Department">Fire Department</option>
+                <option value="Police Department">Police Department</option>
+                <option value="TRANS-Traffic">TRANS-Traffic</option>
+            </select></p>
+
+    </div>
+
+</div>
+
+
+
+
+</body>

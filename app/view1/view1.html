@@ -1,62 +1,59 @@
-<head><h1>  Salary Ranges
-</h1>
+<head>
+    <h2> Baltimore Government Employees' Salary Ranges </h2>
 </head>
-
-
 
 
 <body ng-app="myApp.view1">
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0-rc.1/angular.min.js"></script>
-<script src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script>
-
-<div id = "container" style="width:1200px;">
-
-    <div id = "chart1" ng-controller="View1Ctrl" style = "max-width:800px; max-height:400px; float: left; " >
-
-        <div class = "container">
-            <pie-chart id = "myChart" ng-if="chart.type === 'pie'" data="chart.chartData" labels = "chart.labels">
-
-            </pie-chart>
-
-            <bar-chart id = "myChart2" ng-if="chart.type === 'bar'" data="chart.chartData" labels = "chart.labels">
-
-            </bar-chart>
-
-        </div>
 
 
-        <div>
-            <select id="chartType" ng-model="chart.type">
-                <option value="pie">Pie</option>
-                <option value="bar">Bar</option>
-            </select>
-        </div>
+<div id="chart1" ng-controller="View1Ctrl">
+
+    <div class="container">
+        <pie-chart id="myChart" ng-if="chart.type === 'pie'" data="chart.chartData" labels="chart.labels">
+
+        </pie-chart>
+
+        <bar-chart id="myChart2" ng-if="chart.type === 'bar'" data="chart.chartData" labels="chart.labels">
+
+        </bar-chart>
 
     </div>
 
-
-    <div id="YearFilters" ng-controller="yearFilterOptions" style = "float: right;">
-
-        <p> Filter by Year:
-            <select ng-init="year = options[0]" ng-model="year" ng-change = "changeYear(year)" ng-options="x for x in options">
-        </select> </p>
-
-    </div>
-
-    <div id = "AgencyFilters" ng-controller="agencyFilterOptions" style = "float: right;">
-        <p> Filter by Agency:
-            <select ng-init="agencyz = options1[0]" ng-model="agencyz" ng-change = "changeAgency(agencyz)">
-                <option value = "All"> All</option>
-                <option value = "Mayors Office"> Mayors Office</option>
-                <option value = "Fire Department">Fire Department</option>
-                <option value = "Police Department">Police Department</option>
-            </select> </p>
-
-    </div>
-
+    <p>Chart Type:
+        <select class="chartType" ng-model="chart.type">
+            <option value="pie">Pie</option>
+            <option value="bar">Bar</option>
+        </select>
+    </p>
 
 
 </div>
+
+<div id="filterContainer">
+    <div class="YearFilters" ng-controller="yearFilterOptions">
+
+        <p> Filter by Year:
+            <select ng-init="year = options[0]" ng-model="year" ng-change="changeYear(year)"
+                    ng-options="x for x in options">
+            </select></p>
+
+    </div>
+
+    <div class="AgencyFilters" ng-controller="agencyFilterOptions1">
+        <p> Filter by Agency:
+            <select ng-init="agencyz = options1[0]" ng-model="agencyz" ng-change="changeAgency(agencyz)">
+                <option value="All"> All</option>
+                <option value="Mayors Office"> Mayors Office</option>
+                <option value="Fire Department">Fire Department</option>
+                <option value="Police Department">Police Department</option>
+                <option value="TRANS-Traffic">TRANS-Traffic</option>
+            </select></p>
+
+    </div>
+</div>
+
+
 </body>

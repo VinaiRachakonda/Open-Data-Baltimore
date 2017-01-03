@@ -9,11 +9,27 @@ angular.module('myApp.view1', ['ngRoute', 'chart.js'])
         });
     }])
 
-    .controller('View1Ctrl', ['$scope', '$http', '$timeout', 'salaryDataService', 'agencyChangeService', 'yearChangeService',
-        function ($scope, $http, $timeout, salaryDataService, agencyChangeService, yearChangeService) {
+    .controller('View1Ctrl', ['$scope', '$http', '$timeout', '$window','salaryDataService', 'agencyChangeService', 'yearChangeService',
+        function ($scope, $http, $timeout, $window, salaryDataService, agencyChangeService, yearChangeService) {
 
             // $scope.yearChangeService = yearChangeService;
             // $scope.year = yearChangeService.year;
+
+            $scope.$on('$destroy', function resetEveryThing() {
+                //$window.location.reload(); //reload the page to reset all state
+                agencyChangeService.setAgency("All");
+                yearChangeService.setYear("2016");
+                salaryDataService.byAgency().getData(agencyChangeService.getAgency(),yearChangeService.getYear().toString()).then(
+                    function (data) {
+                        console.log(agencyChangeService.getAgency() + " " + yearChangeService.getYear());
+                        $scope.data2 = data;
+                        $scope.chart.chartData = $scope.data2;
+                    }
+                )
+
+
+
+            });
 
             $scope.$on('year:updated', function (event, data) {
                 salaryDataService.byAgency().getData(agencyChangeService.getAgency(),yearChangeService.getYear().toString()).then(
@@ -40,7 +56,7 @@ angular.module('myApp.view1', ['ngRoute', 'chart.js'])
             });
 
             $scope.chart = {
-                type: 'pie', // pie | bar
+                type: 'bar', // pie | bar
                 chartData: salaryDataService.byAgency().getData(agencyChangeService.getAgency(),yearChangeService.getYear().toString()).then(function (data) {
                     $scope.chart.chartData = data;
                 }),
@@ -76,20 +92,18 @@ angular.module('myApp.view1', ['ngRoute', 'chart.js'])
     }])
 
 
-    .controller('agencyFilterOptions', ['$scope', '$http', 'yearChangeService', 'agencyChangeService',
-        function ($scope, $http , yearChangeService, agencyChangeService) {
+    .controller('agencyFilterOptions1', ['$scope', '$http', 'agencyChangeService',
+        function ($scope, $http, agencyChangeService) {
 
-            $scope.agency = "Mayors Office";  // 2016 | 2015 | 2014
             $scope.options1 = ["All", "Mayors Office", "Police Department", "Fire Department"];
 
             $scope.changeAgency = function (a) {
-                // salaryDataService.byAgency().setAgency(a); //doing nothing???
+                console.log("here");
                 agencyChangeService.setAgency(a.toString());
             };
 
 
         }]);
-
 
 
 

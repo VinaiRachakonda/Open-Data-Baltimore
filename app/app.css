@@ -24,7 +24,7 @@
     padding-right: 0.3em;
 }
 
-h1 {
+h2 {
     color: black;
     text-align: center;
     font-size: 30px;
@@ -32,16 +32,73 @@ h1 {
 
 pie-chart {
     display: block;
-    width: 400px;
+
+    width: 500px;
     height: 300px;
 }
 
 bar-chart {
     display: block;
-    width: 400px;
+    width: 500px;
     height: 300px;
 }
 
-select {
-    margin: 200px 200px 200px 80px;
+line-chart {
+    display: block;
+    width: 500px;
+    height: 400px;
+}
+
+radar-chart {
+    display: block;
+    width: 500px;
+    height: 400px;
+}
+
+#chart1 {
+    max-width:800px;
+    max-height:500px;
+    display: block;
+    display: inline-block;
+}
+
+.container {
+    width: 700px;
+    height: 500px;
+}
+
+.chartType {
+    margin: 10px 10px 5px 0px
+}
+
+#chart2 {
+    max-width:800px;
+    max-height:500px;
+    display: block;
+    display: inline-block;
+}
+
+.container2 {
+    width: 700px;
+    height: 500px;
+}
+
+.chartType2 {
+    margin: 100px 10px 50px 0px
+}
+
+#filterContainer {
+    width: 400px;
+    float: right;
+}
+
+.YearFilters{
+    width: 100%;
+    float:right;
+    height: 40px
+}
+.AgencyFilters{
+    width: 100%;
+    float:right;
+    height: 40px
 }
