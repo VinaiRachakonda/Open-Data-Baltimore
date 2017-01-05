@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="app.css">
 </head>
-<body>
+<body style="background-color: #f3f3f3">
 <ul class="menu">
     <li><a href="#!/view1">view1</a></li>
     <li><a href="#!/view2">view2</a></li>
@@ -25,6 +25,11 @@
 <script src="../node_modules/angular-chart.js/angular-chart.js"></script>
 <script src = "../node_modules/angular-ui-grid/ui-grid.js"></script>
 <link rel = "stylesheet" href="../node_modules/angular-ui-grid/ui-grid.css">
+<!--bootstrap stuff-->
+<!--<script src = "../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>-->
+<script src = "../node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"> </script>
+<link rel = "stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+<!-- -- -->
 <script src="app.js"></script>
 <script src="view1/view1.js"></script>
 <script src="view2/view2.js"></script>
@@ -38,6 +43,7 @@
 <script src = "services/agency-change-service.js"></script>
 <script src = "services/agency-change-service2.js"></script>
 <script src = "services/data-table-service.js"></script>
+<script src = "services/public-art-data-service.js"></script>
 <script>
     angular.bootstrap(document.body, ['myApp']);
 </script>

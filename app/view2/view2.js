@@ -9,8 +9,8 @@ angular.module('myApp.view2', ['ngRoute', 'chart.js'])
         });
     }])
 
-    .controller('View2Ctrl', ['$scope', '$http', '$window', 'salaryDataService', 'agencyChangeService2',
-        function ($scope, $http, $window, salaryDataService, agencyChangeService2) {
+    .controller('View2Ctrl', ['$scope', '$http', '$window', 'salaryDataService', 'dataTableService','publicArtService','agencyChangeService2',
+        function ($scope, $http, $window, salaryDataService, dataTableService, publicArtService, agencyChangeService2) {
 
 
             $scope.$on('$destroy', function resetEverything() {
@@ -47,6 +47,17 @@ angular.module('myApp.view2', ['ngRoute', 'chart.js'])
                 labels: ["1960s", "1970s", "1980s", "1990s", "2000s", "2010s"]
             };
 
+            $scope.gridOptions = {
+                enableFiltering: true,
+                onRegisterApi: function(gridApi){
+                    $scope.gridApi = gridApi;
+                },
+                data: dataTableService.getData().then( function (data) {
+                        $scope.gridOptions.data = data;
+                    }
+
+                )
+            }
 
         }])
 
@@ -61,4 +72,22 @@ angular.module('myApp.view2', ['ngRoute', 'chart.js'])
             };
 
 
-        }]);
+        }])
+
+    .controller('publicArt', ['$scope','publicArtService', function ($scope, publicArtService) {
+        // publicArtService.getData().then (
+        //     function (data) {
+        //         console.log(data[0]);
+        //     }
+        // )
+        $scope.chart = {
+            type: 'line', // line | radar
+            chartData: publicArtService.getData().then(
+                function (data) {
+                    $scope.chart.chartData = [data];
+                }
+            ),
+            labels: ["1960s", "1970s", "1980s", "1990s", "2000s", "2010s"],
+            colors: ['rgba(247,70,74,1)', 'rgba(70,191,189,1)']
+        };
+    }])

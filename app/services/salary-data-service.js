@@ -27,7 +27,6 @@ angular.module('myApp')
                 if (agency1 === "All") {
                     return $http.get(service.getYear2(yr.toString()))
                         .then(function (response) {
-                            console.log("9hkjk");
                             var data1 = response.data.data;
                             var salaries = [];
                             var agencies = [];
@@ -205,7 +204,7 @@ angular.module('myApp')
 
                         })
                 }
-            }
+            };
             return service;
         }
 

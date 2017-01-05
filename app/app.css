@@ -5,6 +5,7 @@
     border-bottom: 0.1em solid black;
     margin-bottom: 2em;
     padding: 0 0 0.5em;
+    background-color: #fff;
 }
 
 .menu:before {
@@ -28,11 +29,11 @@ h2 {
     color: black;
     text-align: center;
     font-size: 30px;
+    padding-bottom: 30px;
 }
 
 pie-chart {
     display: block;
-
     width: 500px;
     height: 300px;
 }
@@ -45,21 +46,20 @@ bar-chart {
 
 line-chart {
     display: block;
-    width: 500px;
-    height: 400px;
+    /*width: 550px;*/
+    /*height: 450px;*/
 }
 
 radar-chart {
     display: block;
-    width: 500px;
-    height: 400px;
+    /*width: 500px;*/
+    /*height: 400px;*/
 }
 
 #chart1 {
-    max-width:800px;
-    max-height:500px;
+    max-width:500px;
+    max-height:400px;
     display: block;
-    display: inline-block;
 }
 
 .container {
@@ -71,12 +71,10 @@ radar-chart {
     margin: 10px 10px 5px 0px
 }
 
-#chart2 {
-    max-width:800px;
-    max-height:500px;
-    display: block;
-    display: inline-block;
-}
+/*#chart2 {*/
+    /*max-width:800px;*/
+    /*max-height:500px;*/
+/*}*/
 
 .container2 {
     width: 700px;
@@ -84,17 +82,17 @@ radar-chart {
 }
 
 .chartType2 {
-    margin: 100px 10px 50px 0px
+    margin: 0px 10px 0px 10px
 }
 
 #filterContainer {
-    width: 400px;
+    width: 300px;
     float: right;
 }
 
 .YearFilters{
     width: 100%;
-    float:right;
+    float:top;
     height: 40px
 }
 .AgencyFilters{
@@ -104,8 +102,8 @@ radar-chart {
 }
 
 .grid {
-    width: 1000px;
-    height: 500px;
-    margin-left: auto;
-    margin-right: auto;
+    /*width: 500px;*/
+    /*height: 500px;*/
+    display: block;
+    margin-left: 20px;
 }

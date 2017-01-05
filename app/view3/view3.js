@@ -2,7 +2,7 @@
  * Created by vinairachakonda on 1/3/17.
  */
 
-angular.module('myApp.view3', ['ngRoute', 'chart.js', 'ui.grid', 'ui.grid.resizeColumns'])
+angular.module('myApp.view3', ['ngRoute', 'chart.js', 'ui.grid', 'ui.grid.resizeColumns', 'ui.bootstrap'])
 
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/view3', {

@@ -13,7 +13,10 @@
                 controllerAs: 'vm',
                 bindToController: {
                     data: '=',
-                    labels: '='
+                    labels: '=',
+                    width: '=',
+                    height: '=',
+                    colors: '='
                 },
             };
         });

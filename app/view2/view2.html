@@ -1,41 +1,64 @@
 <head>
-    <h2>Salaries by Hire Date (Decade)</h2>
+    <h2>Average Salary by Hire Date (Decade)</h2>
 </head>
 
-<body ng-app = "myApp.view2">
+<body ng-app="myApp.view2">
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0-rc.1/angular.min.js"></script>
 
-<div id = "chart2" ng-controller="View2Ctrl">
 
-    <div class="container2">
-        <line-chart id="myChart" ng-if="chart.type === 'line'" data="chart.chartData" labels="chart.labels">
+<div class="row" id="chart2">
+
+    <div class="col-md-8" ng-controller="View2Ctrl" style="margin-left: 20px" min-height = "500" >
+        <line-chart id="myChart" ng-if="chart.type === 'line'" data="chart.chartData" labels="chart.labels" width="500"
+                    height="500" style="background-color: #fff">
 
         </line-chart>
 
-        <radar-chart id="myChart" ng-if="chart.type === 'radar'" data="chart.chartData" labels="chart.labels">
+        <radar-chart id="myChart" ng-if="chart.type === 'radar'" data="chart.chartData" labels="chart.labels"
+                     width="400"
+                     height="400" style="background-color: #fff">
 
         </radar-chart>
 
-        <p>Chart Type:
+        <grid-control id="myChart" ng-if="chart.type === 'table'" ui-grid="gridOptions" height = "400" style="background-color: #fff">
+
+        </grid-control>
+
+        <p style="margin-top: 10px">Chart Type:
             <select class="chartType2" ng-model="chart.type">
                 <option value="line">Line</option>
                 <option value="radar">Radar</option>
+                <option value="table">Table</option>
             </select>
         </p>
 
 
     </div>
 
-</div>
+    <div class="col-md-3">
 
+        <div id="ThingsToVisualize" ng-controller="View2Ctrl">
+            <p style="background-color: #fff; text-align: center; font-size: medium; font-style: oblique"><strong>
+                What do you want to visualize?
+            </strong></p>
+            <p style="text-align: center">
+                <select>
+                    <option value="AvgSal"> Avg.Salary v Hire Date(Decades)</option>
+                    <option value="Ranges"> Gov-Employee Salary Ranges</option>
+                    <option value="Raw">Raw Data</option>
+                </select>
+            </p>
+        </div>
 
-<div id="filterContainer">
+        <p style="background-color: #fff; text-align: center; font-size: medium; font-style: oblique"><strong>
+            Graph Filters
+        </strong></p>
 
-
-    <div class="AgencyFilters" ng-controller="agencyFilterOptions2">
-        <p> Filter by Agency:
-            <select ng-init="agencies = options1[0]" ng-model="agencies" ng-change="changeAgency(agencies)">
+        <p style="text-align: center"> Filter by Agency:
+            <select ng-controller="agencyFilterOptions2" ng-init="agencies = options1[0]" ng-model="agencies"
+                    ng-change="changeAgency(agencies)">
                 <option value="All"> All</option>
                 <option value="Mayors Office"> Mayors Office</option>
                 <option value="Fire Department">Fire Department</option>
@@ -43,11 +66,30 @@
                 <option value="TRANS-Traffic">TRANS-Traffic</option>
             </select></p>
 
+        <p style="background-color: #fff; text-align: center; font-size: medium; font-style: oblique"><strong>
+            Cool Info!
+        </strong></p>
+        <div id= "public arts graph" ng-controller="publicArt">
+            <p style="text-align: center"> New Public Art Installations by Decade</p>
+            <line-chart data="chart.chartData" labels="chart.labels" colors="chart.colors" style="background-color: #fff">
+            </line-chart>
+
+            <p style="text-align: center; padding-top: 8px"> With the exception of the 2000s,
+                the number of new public arts projects in Baltimore is directly correlated
+                to the salaries of employees by hire date. What does this mean?
+                Art lovers should lobby for higher government salaries!!</p>
+        </div>
+
+
+
+
     </div>
 
 </div>
 
+<!--<div class = "row" id="filterContainer">-->
 
 
+<!--</div>-->
 
 </body>
