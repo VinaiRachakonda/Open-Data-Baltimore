@@ -34,14 +34,14 @@ h2 {
 
 pie-chart {
     display: block;
-    width: 500px;
-    height: 300px;
+    /*width: 500px;*/
+    /*height: 300px;*/
 }
 
 bar-chart {
     display: block;
-    width: 500px;
-    height: 300px;
+    /*width: 500px;*/
+    /*height: 300px;*/
 }
 
 line-chart {

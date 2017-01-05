@@ -1,5 +1,5 @@
 <head>
-    <h2>Average Salary by Hire Date (Decade)</h2>
+    <h2>Visualize Baltimore Government Employees Salaries!</h2>
 </head>
 
 <body ng-app="myApp.view2">
@@ -10,44 +10,70 @@
 
 <div class="row" id="chart2">
 
-    <div class="col-md-8" ng-controller="View2Ctrl" style="margin-left: 20px" min-height = "500" >
-        <line-chart id="myChart" ng-if="chart.type === 'line'" data="chart.chartData" labels="chart.labels" width="500"
-                    height="500" style="background-color: #fff">
+    <div class="col-md-8" ng-controller="View2Ctrl" ng-model = "visualizationOptions.type" style="margin-left: 20px" min-height = "700" >
+        <div id = "AvgSal by Hire Data" ng-if="visualizationOptions.type === 'AvgSal'">
+            <line-chart id="myChart" ng-if="chart.type === 'line'" data="chart.chartData" labels="chart.labels"
+                        width="500"
+                        height="5-0" style="background-color: #fff">
 
-        </line-chart>
+            </line-chart>
 
-        <radar-chart id="myChart" ng-if="chart.type === 'radar'" data="chart.chartData" labels="chart.labels"
-                     width="400"
-                     height="400" style="background-color: #fff">
+            <bar-chart id="myChart" ng-if="chart.type === 'bar'" data="chart.chartData" labels="chart.labels"
+                         width="500"
+                         height="500" style="background-color: #fff">
 
-        </radar-chart>
+            </bar-chart>
 
-        <grid-control id="myChart" ng-if="chart.type === 'table'" ui-grid="gridOptions" height = "400" style="background-color: #fff">
+            <p style="margin-top: 10px">Chart Type:
+                <select class="chartType2" ng-model="chart.type">
+                    <option value="line">Line</option>
+                    <option value="bar">Bar</option>
+                </select>
+            </p>
+        </div>
 
-        </grid-control>
+        <div id = "Salary Ranges" ng-if="visualizationOptions.type === 'Ranges'">
+            <bar-chart id="myChart2" ng-if="chart2.type2 === 'bar'"  data="chart2.chartData2" labels="chart2.labels2" width = "500" height = "550"
+                       style="background-color: #fff">
 
-        <p style="margin-top: 10px">Chart Type:
-            <select class="chartType2" ng-model="chart.type">
-                <option value="line">Line</option>
-                <option value="radar">Radar</option>
-                <option value="table">Table</option>
-            </select>
-        </p>
+            </bar-chart>
 
+            <pie-chart id="myChart2" ng-if="chart2.type2 === 'pie'"  data="chart2.chartData2" labels="chart2.labels2" width = "500" height = "550"
+                       style="background-color: #fff">
+
+            </pie-chart>
+
+
+
+            <p style="margin-top: 10px">Chart Type:
+                <select class="chartType2" ng-model="chart2.type2">
+                    <option value="bar">Bar</option>
+                    <option value="pie">Pie</option>
+                </select>
+            </p>
+
+        </div>
+
+        <div id = "Salary Table" ng-if= "visualizationOptions.type === 'Raw'">
+            <grid-control id="myChart"ui-grid="gridOptions" height="550"
+                          style="background-color: #fff">
+
+            </grid-control>
+        </div>
 
     </div>
 
     <div class="col-md-3">
 
-        <div id="ThingsToVisualize" ng-controller="View2Ctrl">
+        <div id="ThingsToVisualize">
             <p style="background-color: #fff; text-align: center; font-size: medium; font-style: oblique"><strong>
                 What do you want to visualize?
             </strong></p>
             <p style="text-align: center">
-                <select>
+                <select ng-controller="visualizationOptions" ng-init = "chartTypes = init" ng-model="chartTypes" ng-change="changeChart(chartTypes)">
                     <option value="AvgSal"> Avg.Salary v Hire Date(Decades)</option>
                     <option value="Ranges"> Gov-Employee Salary Ranges</option>
-                    <option value="Raw">Raw Data</option>
+                    <option value="Raw">Baltimore Gov Employees Salaries Fy.2016</option>
                 </select>
             </p>
         </div>
@@ -56,7 +82,12 @@
             Graph Filters
         </strong></p>
 
-        <p style="text-align: center"> Filter by Agency:
+        <p style="margin-left: 10px" ng-mouseover= "hello"> Filter by Year:
+            <select ng-controller="yearFilterOptions2" ng-init="year = options[0]" ng-model="year"
+                    ng-change="changeYear(year)" ng-options="x for x in options">
+            </select></p>
+
+        <p style="margin-left: 10px"> Filter by Agency:
             <select ng-controller="agencyFilterOptions2" ng-init="agencies = options1[0]" ng-model="agencies"
                     ng-change="changeAgency(agencies)">
                 <option value="All"> All</option>

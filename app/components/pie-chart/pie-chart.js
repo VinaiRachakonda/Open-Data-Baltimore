@@ -10,7 +10,9 @@
                 controllerAs: 'vm',
                 bindToController: {
                     data: '=',
-                    labels: '='
+                    labels: '=',
+                    height: "=",
+                    width: "="
                 },
             };
         });

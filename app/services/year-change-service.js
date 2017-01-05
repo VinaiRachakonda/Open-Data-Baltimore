@@ -2,7 +2,7 @@
  * Created by vinairachakonda on 12/29/16.
  */
 
-angular.module('myApp.view1')
+angular.module('myApp')
         .service('yearChangeService', ['$rootScope', function ($rootScope) {
 
             //service stuff
