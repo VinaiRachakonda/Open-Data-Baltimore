@@ -11,7 +11,6 @@ angular.module('myApp.view2')
         service.setChartType = function (c) {
             service.chart = c;
             $rootScope.$broadcast('chart:updated',service.chart);
-            // $rootScope.$broadcast('chart:updated2',service.chart);
         };
 
         service.getChartType = function () {

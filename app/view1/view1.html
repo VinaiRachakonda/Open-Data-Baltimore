@@ -1,58 +1,96 @@
 <head>
-    <h2> Baltimore Government Employees' Salary Ranges </h2>
+    <h2> Visualize Crime Info in Baltimore! (Go to View 2 plz) </h2>
 </head>
 
-
 <body ng-app="myApp.view1">
-
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0-rc.1/angular.min.js"></script>
 
 
-<div id="chart1" ng-controller="View1Ctrl">
+<div class="row" id="chart2">
+    <div class="col-md-8">
+        <div ng-controller="View1Ctrl" style=" margin-left: 20px; background-color: #fff">
 
-    <div class="container">
-        <pie-chart id="myChart" ng-if="chart.type === 'pie'" data="chart.chartData" labels="chart.labels">
+            <leaflet id="map-simple-map" lf-center="baltimore" geojson="geojson" width="100%" height="500">
 
-        </pie-chart>
+            </leaflet>
 
-        <bar-chart id="myChart2" ng-if="chart.type === 'bar'" data="chart.chartData" labels="chart.labels"
-                   height = "400" width = "400">
+            <!--<pie-chart id="myChart" ng-if="chart.type === 'pie'" data="chart.chartData" labels="chart.labels">-->
 
-        </bar-chart>
+            <!--</pie-chart>-->
 
+            <!--<bar-chart id="myChart2" ng-if="chart.type === 'bar'" data="chart.chartData" labels="chart.labels"-->
+            <!--height="100" width="100">-->
+
+            <!--</bar-chart>-->
+
+            <!--<p>Chart Type:-->
+            <!--<select class="chartType" ng-model="chart.type">-->
+            <!--<option value="pie">Pie</option>-->
+            <!--<option value="bar">Bar</option>-->
+            <!--</select>-->
+            <!--</p>-->
+        </div>
     </div>
 
-    <p>Chart Type:
-        <select class="chartType" ng-model="chart.type">
-            <option value="pie">Pie</option>
-            <option value="bar">Bar</option>
-        </select>
-    </p>
+    <div class="col-md-3">
+        <div id="filterContainer">
+
+            <div id="Graph Legend">
+                <p style="background-color: #fff; text-align: center; font-size: medium; font-style: oblique"><strong>
+                    Map Legend
+                </strong></p>
+
+                <table width="100%">
+                    <tr>
+                        <th style="font-size: 11px;background-color: #646464; text-align: center">Very High Crime Rate
+                        </th>
+                        <th style="font-size: 11px; background-color: #FF0000; text-align: center">High Crime Rate</th>
+                        <th style="font-size: 11px; background-color: #FF7D00; text-align: center">Middle Crime Rate
+                        </th>
+                        <th style="font-size: 11px; background-color: #ffff00; text-align: center;padding-bottom: 10px ">
+                            Low Crime Rate
+                        </th>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="Filters" style="padding-top: 10px">
+                <p style="background-color: #fff; text-align: center; font-size: medium; font-style: oblique"><strong>
+                    Filters
+                </strong></p>
+
+            </div>
 
 
-</div>
+            <div class="YearFilters" ng-controller="yearFilterOptions">
 
-<div id="filterContainer">
-    <div class="YearFilters" ng-controller="yearFilterOptions">
+                <p> Filter by Year:
+                    <select ng-init="year = options[0]" ng-model="year" ng-change="changeYear(year)"
+                            ng-options="x for x in options">
+                    </select>
+                </p>
+            </div>
 
-        <p> Filter by Year:
-            <select ng-init="year = options[0]" ng-model="year" ng-change="changeYear(year)"
-                    ng-options="x for x in options">
-            </select></p>
+            <div id = "Crime Filter" ng-controller="crimeTypeOptions">
+                <p> Filter by Crime:
+                    <select ng-init="crime = options[0]" ng-model="crime" ng-change="changeCrime(crime)"
+                            ng-options="x for x in options">
+                    </select>
+                </p>
+            </div>
 
-    </div>
-
-    <div class="AgencyFilters" ng-controller="agencyFilterOptions1">
-        <p> Filter by Agency:
-            <select ng-init="agencyz = options1[0]" ng-model="agencyz" ng-change="changeAgency(agencyz)">
-                <option value="All"> All</option>
-                <option value="Mayors Office"> Mayors Office</option>
-                <option value="Fire Department">Fire Department</option>
-                <option value="Police Department">Police Department</option>
-                <option value="TRANS-Traffic">TRANS-Traffic</option>
-            </select></p>
-
+            <!--<div class="AgencyFilters" ng-controller="agencyFilterOptions1">-->
+                <!--<p> Filter by Crime Type:-->
+                    <!--<select ng-init="agencyz = options1[0]" ng-model="agencyz" ng-change="changeAgency(agencyz)">-->
+                        <!--<option value="All"> All</option>-->
+                        <!--<option value="Mayors Office"> Mayors Office</option>-->
+                        <!--<option value="Fire Department">Fire Department</option>-->
+                        <!--<option value="Police Department">Police Department</option>-->
+                        <!--<option value="TRANS-Traffic">TRANS-Traffic</option>-->
+                    <!--</select></p>-->
+            <!--</div>-->
+        <!--</div>-->
     </div>
 </div>
 

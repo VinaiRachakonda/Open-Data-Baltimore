@@ -63,8 +63,8 @@ radar-chart {
 }
 
 .container {
-    width: 700px;
-    height: 500px;
+    width: 100px;
+    height: 100px;
 }
 
 .chartType {
@@ -85,21 +85,21 @@ radar-chart {
     margin: 0px 10px 0px 10px
 }
 
-#filterContainer {
-    width: 300px;
-    float: right;
-}
+/*#filterContainer {*/
+    /*width: 300px;*/
+    /*float: right;*/
+/*}*/
 
-.YearFilters{
-    width: 100%;
-    float:top;
-    height: 40px
-}
-.AgencyFilters{
-    width: 100%;
-    float:right;
-    height: 40px
-}
+/*.YearFilters{*/
+    /*width: 100%;*/
+    /*float:top;*/
+    /*height: 40px*/
+/*}*/
+/*.AgencyFilters{*/
+    /*width: 100%;*/
+    /*float:right;*/
+    /*height: 40px*/
+/*}*/
 
 .grid {
     /*width: 500px;*/

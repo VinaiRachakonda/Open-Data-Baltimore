@@ -9,8 +9,10 @@ angular.module('myApp.view1', ['ngRoute', 'chart.js'])
         });
     }])
 
-    .controller('View1Ctrl', ['$scope', '$http', '$timeout', '$window','salaryDataService', 'agencyChangeService', 'yearChangeService',
-        function ($scope, $http, $timeout, $window, salaryDataService, agencyChangeService, yearChangeService) {
+    .controller('View1Ctrl', ['$scope', '$http', '$timeout', '$window', 'salaryDataService',
+                                'geojsonParseService', 'crimeChangeService', 'yearChangeService',
+        function ($scope, $http, $timeout, $window, salaryDataService,
+                  geojsonParseService, crimeChangeService, yearChangeService) {
 
             // $scope.yearChangeService = yearChangeService;
             // $scope.year = yearChangeService.year;
@@ -19,71 +21,78 @@ angular.module('myApp.view1', ['ngRoute', 'chart.js'])
                 //$window.location.reload(); //reload the page to reset all state
                 agencyChangeService.setAgency("All");
                 yearChangeService.setYear("2016");
-                salaryDataService.byAgency().getData(agencyChangeService.getAgency(),yearChangeService.getYear().toString()).then(
+                salaryDataService.byAgency().getData(agencyChangeService.getAgency(), yearChangeService.getYear().toString()).then(
                     function (data) {
                         console.log(agencyChangeService.getAgency() + " " + yearChangeService.getYear());
                         $scope.data2 = data;
                         $scope.chart.chartData = $scope.data2;
                     }
                 )
-
 
 
             });
 
             $scope.$on('year:updated', function (event, data) {
-                salaryDataService.byAgency().getData(agencyChangeService.getAgency(),yearChangeService.getYear().toString()).then(
+                geojsonParseService.getData(yearChangeService.getYear(), crimeChangeService.getCrimeType()).then(
                     function (data) {
-                        console.log(agencyChangeService.getAgency() + " " + yearChangeService.getYear());
-                        console.log(data);
-                        $scope.data2 = data;
-                        $scope.chart.chartData = $scope.data2;
+                        $scope.geojson.data.features = data;
                     }
                 )
-
             });
 
-            $scope.$on('agency:updated', function (event, data1) {
-                $scope.agency = agencyChangeService.getAgency();
-               salaryDataService.byAgency().getData($scope.agency,yearChangeService.getYear().toString()).then(
+            $scope.$on('crime:updated', function () {
+               console.log("hey crime was updated!");
+               geojsonParseService.getData(yearChangeService.getYear(), crimeChangeService.getCrimeType()).then(
                    function (data) {
-                       console.log($scope.agency + " " + yearChangeService.getYear());
-                       console.log(data);
-                       $scope.data3 = data;
-                       $scope.chart.chartData = $scope.data3;
+                        $scope.geojson.data.features = data;
                    }
                )
             });
 
-            $scope.chart = {
-                type: 'bar', // pie | bar
-                chartData: salaryDataService.byAgency().getData(agencyChangeService.getAgency(),yearChangeService.getYear().toString()).then(function (data) {
-                    $scope.chart.chartData = data;
-                }),
-                labels: ["0 - $30,000", "$30,000 - $60,000", "$60,000 - $90,000", "$90,000+"],
+            angular.extend($scope, {
+                baltimore: {
+                    lat: 39.299236,
+                    lng: -76.609383,
+                    zoom: 12
+                    // lng:  -76.65725678399687,
+                    // lat: 39.27599375954768,
+                    // zoom: 12
+                },
+                defaults: {
+                    scrollWheelZoom: false
+                }
+            });
 
-            };
+            angular.extend($scope, {
+                geojson: {
+                    data: {
+                        "type": "FeatureCollection",
+                        "features": geojsonParseService.getData(yearChangeService.getYear(), crimeChangeService.getCrimeType()).then(
+                            function (data) {
+                                $scope.geojson.data.features = data;
+                            }
+                        )
+                    },
+                    style: {
+                        weight: 2,
+                        opacity: 1,
+                        color: 'black',
+                        dashArray: '3',
+                        fillOpacity: 0.7,
+                    },
+                    onEachFeature: function (feature, layer) {
+                        layer.bindPopup(feature.properties.csa + "- " + angular.fromJson(feature.properties.newProperties.selected));
+                        layer.setStyle({fillColor: feature.properties.color});
 
-            // $scope.$watch("yearChangeService.year", function (newVal, oldVal, scope) {
-            //     if (newVal) {
-            //         salaryDataService.myFunc(yearChangeService.getYear().toString()).then(
-            //             function (data) {
-            //                 console.log("Called with year" + " " + yearChangeService.getYear().toString());
-            //                 $scope.data2 = data;
-            //                 $scope.chart.chartData = $scope.data2;
-            //             }
-            //         );
-            //
-            //     }
-            // }, true);
-
+                    }
+                }
+            });
         }])
 
 
     .controller('yearFilterOptions', ['$scope', 'yearChangeService', function ($scope, yearChangeService) {
-        $scope.year = '2016'; // 2016 | 2015 | 2014
-        $scope.options = [2016, 2015, 2014];
-
+        $scope.year = '2014'; // 2016 | 2015 | 2014
+        $scope.options = ['2014', '2013', '2012'];
 
         $scope.changeYear = function (y) {
             yearChangeService.setYear(y);
@@ -91,19 +100,12 @@ angular.module('myApp.view1', ['ngRoute', 'chart.js'])
 
     }])
 
-
-    .controller('agencyFilterOptions1', ['$scope', '$http', 'agencyChangeService',
-        function ($scope, $http, agencyChangeService) {
-
-            $scope.options1 = ["All", "Mayors Office", "Police Department", "Fire Department"];
-
-            $scope.changeAgency = function (a) {
-                console.log("here");
-                agencyChangeService.setAgency(a.toString());
-            };
-
-
-        }]);
+    .controller('crimeTypeOptions', ['$scope','crimeChangeService', function ($scope, crimeChangeService) {
+        $scope.options = ["Crime-Rate", "Violent-Crime"];
+        $scope.changeCrime = function (a) {
+            crimeChangeService.setCrimeType(a);
+        };
+    }])
 
 
 

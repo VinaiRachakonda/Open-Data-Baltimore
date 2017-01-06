@@ -7,8 +7,8 @@ angular.module('myApp', [
     'myApp.view2',
     'myApp.view3',
     'chart.js',
-    'ui.grid'
-
+    'ui.grid',
+    'ui-leaflet'
 ]).config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');
 

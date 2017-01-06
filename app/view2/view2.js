@@ -10,9 +10,9 @@ angular.module('myApp.view2', ['ngRoute', 'chart.js'])
     }])
 
     .controller('View2Ctrl', ['$scope', '$http', '$window', 'salaryDataService', 'dataTableService', 'publicArtService',
-        'agencyChangeService2', 'chartChangeService', 'yearChangeService',
+        'agencyChangeService2', 'chartChangeService', 'yearChangeService2',
         function ($scope, $http, $window, salaryDataService, dataTableService, publicArtService, agencyChangeService2
-            ,chartChangeService, yearChangeService) {
+            ,chartChangeService, yearChangeService2) {
 
 
             $scope.$on('$destroy', function resetEverything() {
@@ -21,8 +21,6 @@ angular.module('myApp.view2', ['ngRoute', 'chart.js'])
                 agencyChangeService2.setAgency("All");
                 salaryDataService.byDecade().getData1(agencyChangeService2.getAgency().toString()).then(
                     function (data) {
-                        console.log($scope.agency);
-                        console.log(data);
                         $scope.data3 = data;
                         $scope.chart.chartData = [$scope.data3];
                     }
@@ -48,10 +46,10 @@ angular.module('myApp.view2', ['ngRoute', 'chart.js'])
                 )
             });
 
-            $scope.$on('year:updated', function (event, data) {
-                salaryDataService.byAgency().getData(agencyChangeService2.getAgency(),yearChangeService.getYear().toString()).then(
+            $scope.$on('year2:updated', function (event, data) {
+                salaryDataService.byAgency().getData(agencyChangeService2.getAgency(),yearChangeService2.getYear().toString()).then(
                     function (data) {
-                        console.log(agencyChangeService2.getAgency() + " " + yearChangeService.getYear());
+                        console.log(agencyChangeService2.getAgency() + " " + yearChangeService2.getYear());
                         console.log(data);
                         $scope.data2 = data;
                         $scope.chart2.chartData2 = $scope.data2;
@@ -76,6 +74,7 @@ angular.module('myApp.view2', ['ngRoute', 'chart.js'])
                 labels: ["1960s", "1970s", "1980s", "1990s", "2000s", "2010s"]
             };
 
+            //repetitive can consolidate
             $scope.chart2 = {
                 type2: 'bar', // bar | pie
                 chartData2: salaryDataService.byAgency().getData(agencyChangeService2.getAgency(), '2016').then(function (data) {
@@ -133,8 +132,8 @@ angular.module('myApp.view2', ['ngRoute', 'chart.js'])
             };
         }])
 
-    .controller('yearFilterOptions2', ['$scope', 'yearChangeService', 'chartChangeService',
-                function ($scope, yearChangeService, chartChangeService) {
+    .controller('yearFilterOptions2', ['$scope', 'yearChangeService2', 'chartChangeService',
+                function ($scope, yearChangeService2, chartChangeService) {
         $scope.year = '2016'; // 2016 | 2015 | 2014
         $scope.options = [2016, 2015, 2014];
 
@@ -146,7 +145,7 @@ angular.module('myApp.view2', ['ngRoute', 'chart.js'])
         // });
 
         $scope.changeYear = function (y) {
-            yearChangeService.setYear(y);
+            yearChangeService2.setYear(y);
         };
 
     }])
