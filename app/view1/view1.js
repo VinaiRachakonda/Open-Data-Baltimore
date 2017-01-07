@@ -74,7 +74,7 @@ angular.module('myApp.view1', ['ngRoute', 'chart.js'])
                     },
                     onEachFeature: function (feature, layer) {
                         layer.bindPopup(feature.properties.csa + "- " +
-                            angular.fromJson(feature.properties.newProperties.selected) + " per 1000 people");
+                            angular.fromJson(feature.properties.newProperties.selected) + " crimes per 1000 people");
                         layer.setStyle({fillColor: feature.properties.color});
 
                     }

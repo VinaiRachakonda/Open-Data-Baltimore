@@ -27,7 +27,7 @@ angular.module('myApp.view1')
                     return "#ce1256"
                 }else if(da > 20 && da < 50) {
                     return "#df65b0"
-                } else if(da > 10 && da < 20){
+                } else if(da > 5 && da < 20){
                     return "#d7b5d8"
                 } else {
                     return "#f1eef6"
