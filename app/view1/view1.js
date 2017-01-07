@@ -9,27 +9,19 @@ angular.module('myApp.view1', ['ngRoute', 'chart.js'])
         });
     }])
 
-    .controller('View1Ctrl', ['$scope', '$http', '$timeout', '$window', 'salaryDataService',
+    .controller('View1Ctrl', ['$scope', '$http', '$timeout', '$window',
                                 'geojsonParseService', 'crimeChangeService', 'yearChangeService',
-        function ($scope, $http, $timeout, $window, salaryDataService,
+        function ($scope, $http, $timeout, $window,
                   geojsonParseService, crimeChangeService, yearChangeService) {
 
-            // $scope.yearChangeService = yearChangeService;
-            // $scope.year = yearChangeService.year;
-
             $scope.$on('$destroy', function resetEveryThing() {
-                //$window.location.reload(); //reload the page to reset all state
-                agencyChangeService.setAgency("All");
-                yearChangeService.setYear("2016");
-                salaryDataService.byAgency().getData(agencyChangeService.getAgency(), yearChangeService.getYear().toString()).then(
+                crimeChangeService.setCrimeType("Crime-Rate");
+                yearChangeService.setYear("2014");
+                geojsonParseService.getData(yearChangeService.getYear(), crimeChangeService.getCrimeType()).then(
                     function (data) {
-                        console.log(agencyChangeService.getAgency() + " " + yearChangeService.getYear());
-                        $scope.data2 = data;
-                        $scope.chart.chartData = $scope.data2;
+                        $scope.geojson.data.features = data;
                     }
                 )
-
-
             });
 
             $scope.$on('year:updated', function (event, data) {
@@ -81,7 +73,8 @@ angular.module('myApp.view1', ['ngRoute', 'chart.js'])
                         fillOpacity: 0.7,
                     },
                     onEachFeature: function (feature, layer) {
-                        layer.bindPopup(feature.properties.csa + "- " + angular.fromJson(feature.properties.newProperties.selected));
+                        layer.bindPopup(feature.properties.csa + "- " +
+                            angular.fromJson(feature.properties.newProperties.selected) + " per 1000 people");
                         layer.setStyle({fillColor: feature.properties.color});
 
                     }
@@ -101,11 +94,15 @@ angular.module('myApp.view1', ['ngRoute', 'chart.js'])
     }])
 
     .controller('crimeTypeOptions', ['$scope','crimeChangeService', function ($scope, crimeChangeService) {
-        $scope.options = ["Crime-Rate", "Violent-Crime"];
+        $scope.options = ["Crime-Rate", "Violent-Crime-Rate"];
+        $scope.crimeType = "Crime-Rate";
         $scope.changeCrime = function (a) {
             crimeChangeService.setCrimeType(a);
+            $scope.crimeType = a;
         };
     }])
+
+
 
 
 

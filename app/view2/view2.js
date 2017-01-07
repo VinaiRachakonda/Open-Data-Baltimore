@@ -31,15 +31,12 @@ angular.module('myApp.view2', ['ngRoute', 'chart.js'])
                 $scope.agency = agencyChangeService2.getAgency();
                 salaryDataService.byDecade().getData1(agencyChangeService2.getAgency().toString()).then(
                     function (data) {
-                        console.log($scope.agency);
-                        console.log(data);
                         $scope.data3 = data;
                         $scope.chart.chartData = [$scope.data3];
                     }
                 );
                 salaryDataService.byAgency().getData($scope.agency, '2016').then(
                     function (data) {
-                        console.log(data);
                         $scope.data3 = data;
                         $scope.chart2.chartData2 = $scope.data3;
                     }

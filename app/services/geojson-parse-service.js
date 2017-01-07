@@ -14,21 +14,23 @@ angular.module('myApp.view1')
                 }
                 else if (da >= 75) {
                     //return "#FF3200"
-                    return "#FF0000"
+                    return "#f03b20"
                 }
                 else if (50 < da && da < 75) {
-                    return "#FF7D00";
+                    return "#feb24c";
                 } else {
-                    return "#FFFF00";
+                    return "#ffeda0";
                 }
             }
             else{
                 if (da >= 50){
-                    return "#2ca25f"
+                    return "#ce1256"
                 }else if(da > 20 && da < 50) {
-                    return "#99d8c9"
-                }else {
-                    return "#e5f5f9"
+                    return "#df65b0"
+                } else if(da > 10 && da < 20){
+                    return "#d7b5d8"
+                } else {
+                    return "#f1eef6"
                 }
             }
         };
