@@ -4,7 +4,9 @@ Interested in visualizing crime, government salaries, etc. in Baltimore? This is
 by https://data.baltimorecity.gov . Features include
 
 -- Interactive maps
+
 -- Responsive graphs
+
 -- Filters, grid controls, etc.
 
 # How to run
